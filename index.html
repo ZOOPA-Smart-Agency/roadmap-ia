@@ -298,6 +298,55 @@
     .footer-note { margin-top: 20px; padding-top: 10px; font-size: 8pt; color: #999; text-align: center; }
     .footer-note .internal { font-size: 7pt; }
 
+    /* ============================================================
+       RESPONSIVE — lectura desde móvil
+       ============================================================ */
+    img { max-width: 100%; height: auto; }
+
+    @media (max-width: 600px) {
+      body { padding: 20px 16px; font-size: 12pt; line-height: 1.55; }
+
+      /* Portada: tipografías más contenidas y sin desbordes */
+      .cover { min-height: auto; padding: 20px 0 30px; }
+      .cover h1 { font-size: 28pt; letter-spacing: -0.5px; max-width: 100%; }
+      .cover-subtitle { font-size: 13pt; max-width: 100%; margin-bottom: 30px; }
+      .cover-eyebrow { margin-bottom: 18px; }
+      .cover-headline-metric { padding: 22px 20px; margin: 20px 0 30px; max-width: 100%; }
+      .cover-headline-metric .metric-value { font-size: 32pt; letter-spacing: -1px; }
+      .cover-headline-metric .metric-label { font-size: 10pt; }
+      .cover-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .cover-date { text-align: left; }
+
+      /* Cabeceras de sección: que envuelvan en vez de comprimirse */
+      .section-header { flex-wrap: wrap; gap: 6px 12px; }
+      .section-title { font-size: 14pt; flex-basis: 100%; order: 2; }
+      .section-number { order: 1; }
+      .section-time { order: 1; font-size: 8pt; }
+
+      /* Enlaces largos (URLs de YouTube/GitHub) sin romper el ancho */
+      a { word-break: break-word; overflow-wrap: anywhere; }
+      .checklist li { font-size: 11pt; }
+      .course-card { padding: 16px 16px; }
+      .course-card h3 { font-size: 13pt; }
+      .course-card p { font-size: 11pt; }
+
+      /* Rejillas a una sola columna */
+      .grid-2, .grid-3, .compare-grid { grid-template-columns: 1fr; }
+
+      /* Bar chart: apilar etiqueta / barra / valor */
+      .bar-chart .bar-row { grid-template-columns: 1fr; gap: 4px; }
+      .bar-chart .bar-label { text-align: left; }
+
+      /* Tablas: fuente y padding menores, scroll horizontal si hace falta */
+      .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { font-size: 10pt; }
+      th { font-size: 8pt; padding: 8px 9px; }
+      td { padding: 8px 9px; }
+
+      .exec-summary { padding: 20px 18px; }
+      .insight-box, .solution-box, .problem-box { font-size: 11pt; }
+    }
+
     @media print {
       body { padding: 0; }
       .section { page-break-inside: avoid; }
@@ -643,7 +692,7 @@
       <div class="section-title">5 palabras para colar en una reunión y que parezca que controlas</div>
       <div class="section-time">Medio en broma</div>
     </div>
-    <div class="insight-box" style="background:#fdf3fa;">
+    <div style="background:#fdf3fa; padding:14px 18px; margin-bottom:14px; font-size:10pt; border-radius:2px;">
       Esto va con retranca, pero funciona. Son las palabras que más se han soltado en reuniones este último año. Úsalas con cabeza (una por reunión, no las cinco de golpe, que canta):
     </div>
     <table>
