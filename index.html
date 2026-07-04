@@ -74,12 +74,13 @@
       margin-bottom: 30px;
     }
     .cover h1 {
-      font-size: 40pt;
+      font-size: clamp(15px, 5.3vw, 38px);
+      white-space: nowrap;
       font-weight: 400;
       letter-spacing: -1.5px;
       line-height: 1.1;
       margin-bottom: 20px;
-      max-width: 92%;
+      max-width: 100%;
     }
     .cover-subtitle {
       font-size: 15pt;
@@ -315,7 +316,7 @@
 
       /* Portada: tipografías más contenidas y sin desbordes */
       .cover { min-height: auto; padding: 20px 0 30px; }
-      .cover h1 { font-size: 28pt; letter-spacing: -0.5px; max-width: 100%; }
+      .cover h1 { letter-spacing: -0.5px; max-width: 100%; }
       .cover-subtitle { font-size: 13pt; max-width: 100%; margin-bottom: 30px; }
       .cover-eyebrow { margin-bottom: 18px; }
       .cover-headline-metric { padding: 14px 18px; margin: 18px 0 28px; max-width: 100%; gap: 12px; }
