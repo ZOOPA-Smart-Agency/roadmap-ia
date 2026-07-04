@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap IA para Choni Fernández Veciana - Optimization Guide</title>
+  <style>
+    /* ============================================================
+       MCZOOPA TEMPLATE · v2.1 (11 jun 2026)
+       ============================================================ */
+    @page {
+      size: A4;
+      margin: 2cm 1.5cm 2cm 1.5cm;
+      @top-left {
+        content: string(doc-title);
+        font-family: 'Georgia', serif;
+        font-size: 8pt;
+        color: #888;
+        margin-bottom: 5mm;
+      }
+      @top-right {
+        content: string(doc-section);
+        font-family: 'Georgia', serif;
+        font-size: 8pt;
+        color: #888;
+        margin-bottom: 5mm;
+      }
+      @bottom-center {
+        content: "Página " counter(page) " de " counter(pages);
+        font-family: 'Georgia', serif;
+        font-size: 8pt;
+        color: #999;
+        margin-top: 5mm;
+      }
+      @bottom-right {
+        content: "";
+        font-family: 'Georgia', serif;
+        font-size: 7pt;
+        color: #bbb;
+        margin-top: 5mm;
+      }
+    }
+    @page :first {
+      @top-left { content: ""; }
+      @top-right { content: ""; }
+      @bottom-center { content: ""; }
+      @bottom-right { content: ""; }
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Georgia', serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      color: #1a1a1a;
+      background: #fff;
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 40px;
+      string-set: doc-title attr(data-title);
+    }
+    .cover {
+      page-break-after: always;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 20px 40px;
+    }
+    .cover-eyebrow {
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .cover h1 {
+      font-size: 40pt;
+      font-weight: 400;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      max-width: 92%;
+    }
+    .cover-subtitle {
+      font-size: 15pt;
+      font-style: italic;
+      color: #555;
+      max-width: 82%;
+      margin-bottom: 50px;
+      line-height: 1.4;
+    }
+    .cover-headline-metric {
+      background: #0a0a0a;
+      color: #fff;
+      padding: 30px 35px;
+      margin: 30px 0 50px;
+      max-width: 90%;
+    }
+    .cover-headline-metric .metric-value {
+      font-size: 48pt;
+      font-weight: 700;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    .cover-headline-metric .metric-label {
+      font-size: 11pt;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-top: 10px;
+      opacity: 0.7;
+    }
+    .cover-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-top: 30px;
+      border-top: 1px solid #ccc;
+      font-size: 10pt;
+    }
+    .cover-author { color: #333; }
+    .cover-author strong { display: block; font-size: 12pt; margin-bottom: 3px; }
+    .cover-date { text-align: right; color: #666; }
+    .cover-brand-logo { margin-top: 8px; }
+    .cover-brand-logo img { height: 24px; width: auto; }
+
+    .exec-summary {
+      background: #f3f3f3;
+      padding: 25px 30px;
+      margin-bottom: 35px;
+      border-radius: 2px;
+    }
+    .exec-summary h2 {
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      font-weight: 700;
+      color: #000;
+    }
+    .exec-summary p { font-size: 11pt; margin-bottom: 10px; }
+    .exec-summary strong { color: #b30000; }
+
+    .section { margin-bottom: 35px; page-break-inside: avoid; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 18px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+    .section-number {
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #888;
+      margin-right: 18px;
+      text-transform: uppercase;
+    }
+    .section-number::before { content: "§ "; color: #ccc; }
+    .section-title { font-size: 15pt; font-weight: 600; flex: 1; string-set: doc-section content(); }
+    .section-time {
+      font-size: 9pt;
+      color: #666;
+      background: #f0f0f0;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .solution-box {
+      background: #f0f8f0;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      font-size: 10pt;
+      border-radius: 2px;
+    }
+    .solution-box::before {
+      content: "SIGUIENTE FASE";
+      display: inline-block;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #1f6b1f;
+      background: #fff;
+      padding: 2px 8px;
+      margin-right: 10px;
+      border-radius: 2px;
+    }
+    .insight-box {
+      background: #fef9ed;
+      padding: 14px 18px;
+      margin-bottom: 14px;
+      font-size: 10pt;
+      border-radius: 2px;
+    }
+    .insight-box::before {
+      content: "DÓNDE PRACTICAR";
+      display: inline-block;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #8a5800;
+      background: #fff;
+      padding: 2px 8px;
+      margin-right: 10px;
+      border-radius: 2px;
+    }
+
+    table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 9.5pt; }
+    th {
+      background: #1a1a1a;
+      color: #fff;
+      text-align: left;
+      padding: 9px 12px;
+      font-weight: 500;
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    td { padding: 10px 12px; border-bottom: 1px solid #eaeaea; vertical-align: top; }
+    tr:nth-child(even) { background: #fafafa; }
+    .td-label { font-weight: 600; }
+    .td-cost { color: #1f6b1f; font-weight: 700; }
+    .td-hours { font-family: 'Consolas', monospace; font-weight: 700; }
+
+    .course-card {
+      background: #fafafa;
+      padding: 18px 22px;
+      margin-bottom: 16px;
+      border-radius: 2px;
+    }
+    .course-card h3 {
+      font-size: 12.5pt;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .course-card .course-meta {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 8.5pt;
+    }
+    .pill {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 2px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .pill-free { background: #ddf4dd; color: #1f6b1f; }
+    .pill-hours { background: #eaeaea; color: #333; }
+    .pill-provider { background: #e8eef7; color: #1a3d6b; }
+    .course-card p { font-size: 10pt; margin-bottom: 6px; }
+    .course-card p strong { color: #000; }
+    .course-card a { color: #1a3d6b; word-break: break-all; }
+
+    .checklist { list-style: none; margin: 15px 0; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 9px;
+      font-size: 10pt;
+    }
+    .checkbox {
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid #333;
+      margin-right: 11px;
+      margin-top: 3px;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+
+    .timeline { margin: 18px 0; }
+    .timeline-item { padding: 10px 14px; margin-bottom: 8px; background: #f7f7f7; border-radius: 2px; }
+    .timeline-date {
+      font-size: 9pt;
+      font-weight: 700;
+      color: #666;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .timeline-content { font-size: 10pt; margin-top: 4px; }
+
+    .final-section {
+      background: #f3f3f3;
+      padding: 22px 25px;
+      margin-top: 30px;
+      border-radius: 2px;
+    }
+
+    footer { margin-top: 50px; padding-top: 25px; border-top: 2px solid #000; }
+    .footer-logos { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .footer-logos img { height: 17px; width: auto; }
+    .footer-info { display: flex; justify-content: space-between; font-size: 8pt; color: #999; }
+    .footer-info strong { color: #666; }
+    .footer-info a { color: #666; text-decoration: none; }
+    .footer-note { margin-top: 20px; padding-top: 10px; font-size: 8pt; color: #999; text-align: center; }
+    .footer-note .internal { font-size: 7pt; }
+
+    @media print {
+      body { padding: 0; }
+      .section { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body data-title="Roadmap IA para Choni Fernández Veciana">
+
+  <div class="cover">
+    <div>
+      <div class="cover-eyebrow">Zoopa · Formación ejecutiva en IA</div>
+      <h1>Roadmap de introducción a la IA</h1>
+      <div class="cover-subtitle">Choni, esto es un camino de tres cursos gratuitos, en orden, para que en unas semanas tengas base sólida y criterio propio sobre IA. Sin código, sin humo.</div>
+    </div>
+
+    <div class="cover-headline-metric">
+      <div class="metric-value">9h</div>
+      <div class="metric-label">dedicación total estimada (ritmo ejecutivo) · coste 0€</div>
+    </div>
+
+    <div class="cover-footer">
+      <div class="cover-author">
+        <strong>Para Choni Fernández Veciana</strong>
+        <span>Dirección de Sostenibilidad y Operaciones</span>
+      </div>
+      <div class="cover-date">
+        <div>4 de julio de 2026</div>
+        <div class="cover-brand-logo"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI1LjIuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiCgkgdmlld0JveD0iMCAwIDUwMCAxMjcuOSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTAwIDEyNy45OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+Cgkuc3Qwe2ZpbGw6IzFEMUQxQjt9Cjwvc3R5bGU+CjxnPgoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyNi45LDQzLjlIOTRWMjkuN2g1Ny43djE0LjJMMTE2LjEsODRoMzguMXYxNC4ySDkxLjNWODRMMTI2LjksNDMuOXoiLz4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNjQuNiw0OS4xYzEuNy00LjUsNC4xLTguMiw3LjEtMTEuNGMzLjEtMy4xLDYuOC01LjYsMTEuMS03LjNzOS4yLTIuNiwxNC41LTIuNnMxMC4zLDAuOSwxNC42LDIuNgoJCWM0LjQsMS43LDguMSw0LjEsMTEuMiw3LjNjMy4xLDMuMSw1LjUsNi45LDcuMSwxMS40YzEuNyw0LjUsMi41LDkuNCwyLjUsMTQuOXMtMC44LDEwLjQtMi41LDE0LjhzLTQuMSw4LjItNy4xLDExLjMKCQljLTMuMSwzLjEtNi44LDUuNS0xMS4yLDcuMnMtOS4yLDIuNS0xNC42LDIuNXMtMTAuMi0wLjgtMTQuNS0yLjVzLTgtNC4xLTExLjEtNy4ycy01LjUtNi45LTcuMS0xMS4zYy0xLjctNC40LTIuNS05LjMtMi41LTE0LjgKCQlTMTYyLjksNTMuNiwxNjQuNiw0OS4xeiBNMTgxLjcsNzJjMC41LDIuNiwxLjQsNC45LDIuNyw3czMsMy43LDUuMSw1YzIuMSwxLjIsNC44LDEuOSw3LjksMS45YzMuMiwwLDUuOC0wLjYsOC0xLjkKCQljMi4yLTEuMiwzLjktMi45LDUuMi01czIuMi00LjQsMi43LTdzMC44LTUuMywwLjgtOGMwLTIuNy0wLjMtNS40LTAuOC04LjFjLTAuNS0yLjYtMS40LTUtMi43LTdzLTMtMy43LTUuMi01cy00LjgtMS45LTgtMS45CgkJcy01LjgsMC42LTcuOSwxLjljLTIuMSwxLjMtMy44LDIuOS01LjEsNWMtMS4zLDItMi4yLDQuNC0yLjcsN3MtMC44LDUuMy0wLjgsOC4xQzE4MC45LDY2LjcsMTgxLjEsNjkuNCwxODEuNyw3MnoiLz4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0yNDUuNCw0OS4xYzEuNy00LjUsNC4xLTguMiw3LjEtMTEuNGMzLjEtMy4xLDYuOC01LjYsMTEuMS03LjNjNC4zLTEuNyw5LjItMi42LDE0LjUtMi42CgkJYzUuNCwwLDEwLjIsMC45LDE0LjYsMi42czguMSw0LjEsMTEuMiw3LjNjMy4xLDMuMSw1LjUsNi45LDcuMSwxMS40YzEuNyw0LjUsMi41LDkuNCwyLjUsMTQuOXMtMC44LDEwLjQtMi41LDE0LjgKCQlzLTQuMSw4LjItNy4xLDExLjNjLTMuMSwzLjEtNi44LDUuNS0xMS4yLDcuMmMtNC40LDEuNy05LjIsMi41LTE0LjYsMi41cy0xMC4yLTAuOC0xNC41LTIuNXMtOC00LjEtMTEuMS03LjJzLTUuNS02LjktNy4xLTExLjMKCQljLTEuNy00LjQtMi41LTkuMy0yLjUtMTQuOFMyNDMuNyw1My42LDI0NS40LDQ5LjF6IE0yNjIuNSw3MmMwLjUsMi42LDEuNCw0LjksMi43LDdjMS4zLDIuMSwzLDMuNyw1LjEsNWMyLjEsMS4yLDQuOCwxLjksNy45LDEuOQoJCXM1LjgtMC42LDgtMS45YzIuMi0xLjIsMy45LTIuOSw1LjItNWMxLjMtMi4xLDIuMi00LjQsMi43LTdzMC44LTUuMywwLjgtOGMwLTIuNy0wLjMtNS40LTAuOC04LjFjLTAuNS0yLjYtMS40LTUtMi43LTcKCQljLTEuMy0yLTMtMy43LTUuMi01cy00LjgtMS45LTgtMS45cy01LjgsMC42LTcuOSwxLjljLTIuMSwxLjMtMy44LDIuOS01LjEsNWMtMS4zLDItMi4yLDQuNC0yLjcsN3MtMC44LDUuMy0wLjgsOC4xCgkJQzI2MS43LDY2LjcsMjYxLjksNjkuNCwyNjIuNSw3MnoiLz4KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0zNDMuNywyOS43djguN2gwLjNjMi4zLTMuNyw1LjItNi40LDguNy04LjFjMy41LTEuNyw3LjQtMi41LDExLjYtMi41YzUuNCwwLDEwLDEsMTMuOSwzczcuMSw0LjcsOS43LDguMQoJCXM0LjUsNy4zLDUuNywxMS43YzEuMiw0LjUsMS45LDkuMSwxLjksMTRjMCw0LjYtMC42LDktMS45LDEzLjJjLTEuMiw0LjItMy4xLDgtNS42LDExLjJjLTIuNSwzLjMtNS42LDUuOS05LjQsNy44CgkJYy0zLjcsMS45LTguMSwyLjktMTMuMiwyLjljLTQuMiwwLTguMS0wLjktMTEuNy0yLjZzLTYuNS00LjMtOC44LTcuNmgtMC4zVjEyMmgtMTguOFYyOS43SDM0My43eiBNMzY4LjEsODRjMi4xLTEuMiwzLjctMi44LDUtNC44CgkJczIuMi00LjMsMi43LTYuOXMwLjgtNS4zLDAuOC04LjFjMC0yLjctMC4zLTUuNC0wLjktOC4xYy0wLjYtMi42LTEuNS01LTIuOC03LjFzLTMtMy43LTUuMS01cy00LjYtMS45LTcuNi0xLjkKCQljLTMuMSwwLTUuNywwLjYtNy43LDEuOWMtMi4xLDEuMy0zLjcsMi45LTUsNWMtMS4zLDItMi4yLDQuNC0yLjcsN3MtMC44LDUuNC0wLjgsOC4yYzAsMi43LDAuMyw1LjQsMC45LDguMWMwLjYsMi42LDEuNSw1LDIuOCw2LjkKCQljMS4zLDIsMywzLjYsNS4xLDQuOGMyLjEsMS4yLDQuNywxLjksNy43LDEuOUMzNjMuNCw4NS44LDM2Niw4NS4yLDM2OC4xLDg0eiIvPgoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTQwNS44LDUwLjhjMC4zLTQuNCwxLjQtOC4xLDMuMy0xMWMxLjktMi45LDQuNC01LjIsNy40LTdzNi40LTMsMTAuMS0zLjhjMy43LTAuNyw3LjUtMS4xLDExLjMtMS4xCgkJYzMuNCwwLDYuOSwwLjIsMTAuNCwwLjdzNi43LDEuNCw5LjcsMi44YzIuOSwxLjQsNS4zLDMuNCw3LjEsNS45YzEuOSwyLjUsMi44LDUuOCwyLjgsMTB2MzUuNmMwLDMuMSwwLjIsNiwwLjUsOC45CgkJYzAuNCwyLjgsMSw0LjksMS45LDYuM2gtMTljLTAuNC0xLjEtMC42LTIuMS0wLjktMy4yYy0wLjItMS4xLTAuNC0yLjItMC41LTMuNGMtMywzLjEtNi41LDUuMi0xMC42LDYuNWMtNC4xLDEuMi04LjIsMS45LTEyLjQsMS45CgkJYy0zLjMsMC02LjMtMC40LTkuMS0xLjJjLTIuOC0wLjgtNS4zLTItNy40LTMuN3MtMy44LTMuOC01LTYuM2MtMS4yLTIuNi0xLjgtNS42LTEuOC05LjFjMC0zLjksMC43LTcuMSwyLTkuNgoJCWMxLjQtMi41LDMuMS00LjUsNS4zLTZjMi4yLTEuNSw0LjYtMi42LDcuNC0zLjRjMi44LTAuNyw1LjYtMS4zLDguNC0xLjhjMi44LTAuNCw1LjYtMC44LDguMy0xLjFjMi43LTAuMyw1LjItMC43LDcuMy0xLjIKCQljMi4xLTAuNSwzLjgtMS4zLDUtMi4zczEuOC0yLjUsMS43LTQuNGMwLTItMC4zLTMuNi0xLTQuOHMtMS41LTIuMS0yLjYtMi44cy0yLjQtMS4xLTMuOC0xLjNjLTEuNS0wLjItMy0wLjMtNC43LTAuMwoJCWMtMy43LDAtNi42LDAuOC04LjcsMi40Yy0yLjEsMS42LTMuNCw0LjItMy43LDcuOWgtMTguN1Y1MC44eiBNNDQ5LjIsNjQuNmMtMC44LDAuNy0xLjgsMS4zLTMsMS43Yy0xLjIsMC40LTIuNSwwLjctMy44LDEKCQljLTEuNCwwLjMtMi44LDAuNS00LjMsMC43cy0zLDAuNC00LjUsMC43Yy0xLjQsMC4zLTIuOCwwLjYtNC4yLDEuMWMtMS40LDAuNC0yLjYsMS0zLjYsMS44cy0xLjgsMS43LTIuNCwyLjgKCQljLTAuNiwxLjEtMC45LDIuNi0wLjksNC40YzAsMS43LDAuMywzLjEsMC45LDQuMnMxLjUsMi4xLDIuNSwyLjdjMS4xLDAuNywyLjMsMS4xLDMuNywxLjRjMS40LDAuMywyLjksMC40LDQuNCwwLjQKCQljMy43LDAsNi42LTAuNiw4LjYtMS45YzItMS4yLDMuNS0yLjcsNC41LTQuNGMxLTEuNywxLjYtMy41LDEuOC01LjJjMC4yLTEuOCwwLjMtMy4yLDAuMy00LjJWNjQuNnoiLz4KPC9nPgo8cmVjdCB4PSIyMy4yIiB5PSI1NC4zIiBjbGFzcz0ic3QwIiB3aWR0aD0iNTcuNSIgaGVpZ2h0PSIxNy42Ii8+Cjwvc3ZnPgo=" alt="ZOOPA"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== EXECUTIVE SUMMARY ====== -->
+  <div class="exec-summary">
+    <h2>Resumen Ejecutivo</h2>
+    <p><strong>De qué va esto:</strong> te llegan propuestas de IA a la mesa y ahora mismo dependes de que un tercero te diga si tienen sentido. La idea es que dejes de hacerlo. Que puedas mirar un proyecto de IA (en sostenibilidad, en operaciones) y saber por ti misma si va en serio o es humo, y de paso usar la herramienta en tu día a día y en el del equipo. Nada de esto pide saber programar.</p>
+    <p><strong>Adónde llegas:</strong> con tres cursos (unas 9 horas, gratis) tendrás el vocabulario y un método para evaluar cualquier propuesta de IA. Y sabrás usarla. La Fase 2 baja ese criterio a casos reales de ESG y a las herramientas concretas con las que trabajas.</p>
+  </div>
+
+  <!-- ====== 10 COSAS QUE SABRÁ HACER ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Al terminar</div>
+      <div class="section-title">Choni, esto es lo que sabrás hacer al terminar</div>
+      <div class="section-time">Dirección General · Operaciones · Sostenibilidad</div>
+    </div>
+
+    <ul class="checklist">
+      <li><div class="checkbox"></div>Sentarte en una reunión y saber, ahí mismo, si una propuesta de IA va en serio o es humo. Sin llamar a nadie para que te lo traduzca.</li>
+      <li><div class="checkbox"></div>Escribir un briefing de caso de uso con la estructura que un comité espera ver: problema, datos, riesgo, retorno.</li>
+      <li><div class="checkbox"></div>Pedirle a la IA un primer borrador de un informe ESG y luego revisarlo con ojo crítico, que es donde está tu valor.</li>
+      <li><div class="checkbox"></div>Descargar en la IA el trabajo repetitivo del equipo (recopilar datos, resumir informes de proveedores, cruzar KPIs) con un método claro detrás, el de las 4D: Delegación, Descripción, Discernimiento, Diligencia.</li>
+      <li><div class="checkbox"></div>Cazar un sesgo, un error o una alucinación en una respuesta de IA antes de que acabe en un informe oficial o delante del consejo.</li>
+      <li><div class="checkbox"></div>Apretar a un proveedor con las preguntas correctas: qué modelo usa, de qué datos se alimenta, qué garantías de gobernanza te da.</li>
+      <li><div class="checkbox"></div>Decidir qué iniciativas de IA del equipo merecen presupuesto y cuáles son ruido.</li>
+      <li><div class="checkbox"></div>Tirar del seguimiento de indicadores de sostenibilidad (consumo, emisiones, cumplimiento) con herramientas de IA conectadas a tus fuentes de datos.</li>
+      <li><div class="checkbox"></div>Montar y conducir una sesión con tu equipo para mapear qué tareas son candidatas a IA.</li>
+      <li><div class="checkbox"></div>Defender ante dirección o consejo una postura informada sobre los riesgos y las oportunidades de la IA en tu área.</li>
+    </ul>
+
+    <div class="solution-box" style="margin-top:18px;">Y hay tres cosas que este programa te deja en el perfil profesional, más allá de las capacidades de arriba. Una, un método de evaluación que sirve para cualquier propuesta futura, no solo para las de este curso. Dos, certificados de sitios que pesan (DeepLearning.AI, Anthropic, IBM) para enseñar de forma tangible que te has puesto al día, ante consejo, clientes o reguladores. Y tres, el vocabulario y el criterio para sentarte en un comité de innovación o de tecnología sin necesitar a nadie que te haga de intérprete entre lo técnico y lo estratégico.</div>
+  </div>
+
+  <!-- ====== FASE 1 ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Fase 1</div>
+      <div class="section-title">Fundamentos y capacidad de análisis</div>
+      <div class="section-time">~9h · 0€</div>
+    </div>
+
+    <div class="course-card">
+      <h3>1. AI For Everyone</h3>
+      <div class="course-meta">
+        <span class="pill pill-provider">DeepLearning.AI</span>
+        <span class="pill pill-hours">~4h (est. original 7h)</span>
+        <span class="pill pill-free">0€</span>
+      </div>
+      <p><strong>Qué te llevas:</strong> el vocabulario y los conceptos base. Qué es la IA, qué no es, qué puede hacer un modelo y qué no. Aquí dejas de tirar de intuición y empiezas a hablar con propiedad.</p>
+      <p><strong>Dónde lo usas:</strong> es tu primer filtro. Cuando alguien te presente un proyecto, ya distingues en la reunión si aquello se sostiene o no.</p>
+      <p><strong>Por qué fiarte:</strong> lo da Andrew Ng, cofundador de Google Brain y de Coursera. Si hay un nombre de referencia en enseñar IA a gente no técnica, es el suyo.</p>
+      <p>Link: <a href="https://www.coursera.org/learn/ai-for-everyone">coursera.org/learn/ai-for-everyone</a></p>
+    </div>
+
+    <div class="course-card">
+      <h3>2. Generative AI for Everyone</h3>
+      <div class="course-meta">
+        <span class="pill pill-provider">DeepLearning.AI</span>
+        <span class="pill pill-hours">~3h (est. original 5h)</span>
+        <span class="pill pill-free">0€</span>
+      </div>
+      <p><strong>Qué te llevas:</strong> cómo montar una estrategia de IA generativa a nivel de negocio, con criterio para ver dónde aporta valor de verdad y dónde no.</p>
+      <p><strong>Dónde lo usas:</strong> para decidir qué iniciativas del equipo merecen presupuesto, y para exigir a un tercero los KPIs correctos antes de dar el sí a un proyecto.</p>
+      <p><strong>Por qué fiarte:</strong> otra vez Andrew Ng. Es la continuación natural del primero, ya centrada en generativa y en su uso en empresa.</p>
+      <p>Link: <a href="https://www.coursera.org/learn/generative-ai-for-everyone">coursera.org/learn/generative-ai-for-everyone</a></p>
+    </div>
+
+    <div class="course-card">
+      <h3>3. AI Fluency: Framework &amp; Foundations</h3>
+      <div class="course-meta">
+        <span class="pill pill-provider">Anthropic</span>
+        <span class="pill pill-hours">~2h (est. original 3.5h)</span>
+        <span class="pill pill-free">0€</span>
+      </div>
+      <p><strong>Qué te llevas:</strong> un marco práctico, las 4D (Delegación, Descripción, Discernimiento, Diligencia), para trabajar con IA de forma útil, ética y segura. Y sirve con cualquier herramienta, no solo con Claude.</p>
+      <p><strong>Dónde lo usas:</strong> en el día a día, cuando le pasas trabajo a un asistente (un informe ESG, el resumen de una reunión, el primer borrador de un documento) sin perder el control de la calidad ni el criterio.</p>
+      <p><strong>Por qué fiarte:</strong> lo firma Anthropic, la casa de Claude, con académicos de University College Cork y Ringling College. Es el marco más reciente y el que menos te ata a una herramienta concreta.</p>
+      <p>Link: <a href="https://anthropic.skilljar.com/ai-fluency-framework-foundations">anthropic.skilljar.com/ai-fluency-framework-foundations</a></p>
+    </div>
+
+    <table>
+      <tr><th>Curso</th><th>Proveedor</th><th>Horas (ritmo ejecutivo)</th><th>Coste</th></tr>
+      <tr>
+        <td class="td-label">AI For Everyone</td>
+        <td>DeepLearning.AI</td>
+        <td class="td-hours">4h</td>
+        <td class="td-cost">0€</td>
+      </tr>
+      <tr>
+        <td class="td-label">Generative AI for Everyone</td>
+        <td>DeepLearning.AI</td>
+        <td class="td-hours">3h</td>
+        <td class="td-cost">0€</td>
+      </tr>
+      <tr>
+        <td class="td-label">AI Fluency: Framework &amp; Foundations</td>
+        <td>Anthropic</td>
+        <td class="td-hours">2h</td>
+        <td class="td-cost">0€</td>
+      </tr>
+      <tr>
+        <td class="td-label">Total Fase 1</td>
+        <td>&mdash;</td>
+        <td class="td-hours">9h</td>
+        <td class="td-cost">0€</td>
+      </tr>
+    </table>
+
+    <div class="insight-box">Para que quede constancia en tu perfil: en Coursera (los cursos 1, 2 y el de IBM), cuando termines cada uno entra en "My Achievements", te descargas el certificado y pulsas "Add to LinkedIn Profile". Se añade solo a la sección de Licencias y certificaciones. El de Anthropic (AI Fluency) va por otra plataforma, Skilljar, así que ese lo bajas en PDF y lo subes a mano a LinkedIn como "AI Fluency: Framework &amp; Foundations, Anthropic". Un consejo: agrupa los cuatro bajo una sola sección, algo tipo "Formación en IA 2026", para que se lea como un programa y no como cuatro cursos sueltos.</div>
+  </div>
+
+  <!-- ====== IBM Y OPENAI ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Fase 1 bis</div>
+      <div class="section-title">IBM y OpenAI: dos proveedores más</div>
+      <div class="section-time">~3h · 0€</div>
+    </div>
+
+    <div class="course-card">
+      <h3>4. Generative AI for Executives &amp; Business Leaders</h3>
+      <div class="course-meta">
+        <span class="pill pill-provider">IBM</span>
+        <span class="pill pill-hours">~2h (est. original 3h)</span>
+        <span class="pill pill-free">0€ (tiempo limitado)</span>
+      </div>
+      <p><strong>Qué te llevas:</strong> el tercer módulo te hace formular un caso de uso propio, que es exactamente el ejercicio que luego repites con proyectos reales de tu área.</p>
+      <p><strong>Dónde lo usas:</strong> como plantilla para llevar internamente un primer caso de negocio de IA, con la estructura que un comité espera ver.</p>
+      <p><strong>Por qué fiarte:</strong> lo da IBM, que lleva más de una década vendiendo IA empresarial (Watson) y hablando con comités de dirección de grandes cuentas.</p>
+      <p>Link: <a href="https://www.coursera.org/specializations/generative-ai-for-executives-and-business-leaders">coursera.org/specializations/generative-ai-for-executives-and-business-leaders</a></p>
+    </div>
+
+    <div class="insight-box">Y sin horas que contar, para picar entre curso y curso: la playlist <strong>"IBM AI Foundations for Everyone"</strong> (canal IBM Technology, YouTube), vídeos cortos que puedes ver sueltos. <a href="https://www.youtube.com/@IBMTechnology/playlists">youtube.com/@IBMTechnology/playlists</a></p>
+    </div>
+
+    <div class="course-card">
+      <h3>Alternativa OpenAI: cursos vía Coursera</h3>
+      <div class="course-meta">
+        <span class="pill pill-provider">OpenAI</span>
+        <span class="pill pill-hours">variable</span>
+        <span class="pill pill-free">0€</span>
+      </div>
+      <p><strong>Un aviso:</strong> el curso "AI Foundations" de OpenAI Academy (60-75 min, muy práctico) existe, pero de momento el acceso va por acuerdos con empresas grandes (Walmart, BCG, Accenture) y no es de matrícula abierta. Antes de meterlo en el plan habría que confirmar si Zoopa/498A tiene esa puerta.</p>
+      <p><strong>La vía sin ese lío:</strong> los cursos de OpenAI que están en su página de partner en Coursera. Mismo espíritu práctico, acceso abierto.</p>
+      <p>Link: <a href="https://www.coursera.org/partners/openai">coursera.org/partners/openai</a></p>
+    </div>
+  </div>
+
+  <!-- ====== VIDEOS Y REPOS ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Anexo</div>
+      <div class="section-title">Vídeos de YouTube y repositorios de skills</div>
+      <div class="section-time">Práctica autoguiada</div>
+    </div>
+
+    <div class="insight-box">Esto no sustituye a los cursos. Es para verlo "manos a la obra": cómo se usan de verdad las apps de escritorio y las skills. Los localizamos buscando, y como los títulos de YouTube van sobrados de clickbait, mejor que alguien del equipo les eche un ojo antes de que lleguen a la bandeja de Choni.</div>
+
+    <h3 style="font-size:12pt; margin: 18px 0 10px; font-weight:600;">Claude (Anthropic)</h3>
+    <p style="font-size:10pt; margin-bottom:6px;"><strong>5 vídeos de uso de Claude Cowork y Claude Code en la app de escritorio:</strong></p>
+    <ul class="checklist">
+      <li><div class="checkbox"></div>"How to Use Claude Cowork: Full Beginners Tutorial 2026" &mdash; <a href="https://www.youtube.com/watch?v=UR0gac-ccjg">youtube.com/watch?v=UR0gac-ccjg</a></li>
+      <li><div class="checkbox"></div>"The Ultimate Claude Cowork Tutorial For Beginners 2026" &mdash; <a href="https://www.youtube.com/watch?v=AxN7wkYRexQ">youtube.com/watch?v=AxN7wkYRexQ</a></li>
+      <li><div class="checkbox"></div>"How to Use Claude Cowork &ndash; Full Workflow Automation Guide 2026" &mdash; <a href="https://www.youtube.com/watch?v=SNo_recKZyY">youtube.com/watch?v=SNo_recKZyY</a></li>
+      <li><div class="checkbox"></div>"Claude Code Desktop App: Beginner's Guide (No Terminal Needed)" &mdash; <a href="https://www.youtube.com/watch?v=P7-0grEB7nk">youtube.com/watch?v=P7-0grEB7nk</a></li>
+      <li><div class="checkbox"></div>"How to Set Up Claude Code on Desktop App (For Beginners)" &mdash; <a href="https://www.youtube.com/watch?v=40eJ4xdAQ0s">youtube.com/watch?v=40eJ4xdAQ0s</a></li>
+    </ul>
+    <p style="font-size:10pt; margin: 10px 0 6px;"><strong>1 vídeo de uso de skills:</strong></p>
+    <ul class="checklist">
+      <li><div class="checkbox"></div>"Claude Skills Tutorial (2026): Build, Run, and Share" &mdash; <a href="https://www.youtube.com/watch?v=O_z9vDLgvoY">youtube.com/watch?v=O_z9vDLgvoY</a></li>
+    </ul>
+    <p style="font-size:10pt; margin: 10px 0 6px;"><strong>2 repositorios de skills de Claude:</strong></p>
+    <ul class="checklist">
+      <li><div class="checkbox"></div><a href="https://github.com/hesreallyhim/awesome-claude-code">github.com/hesreallyhim/awesome-claude-code</a> &mdash; colección curada de skills, agentes, hooks y comandos de alta calidad.</li>
+      <li><div class="checkbox"></div><a href="https://github.com/ComposioHQ/awesome-claude-skills">github.com/ComposioHQ/awesome-claude-skills</a> &mdash; catálogo de más de 1.000 skills y plugins listos para producción.</li>
+    </ul>
+
+    <h3 style="font-size:12pt; margin: 22px 0 10px; font-weight:600;">Codex (OpenAI)</h3>
+    <p style="font-size:10pt; margin-bottom:6px;"><strong>5 vídeos de uso de la app de escritorio de Codex:</strong></p>
+    <ul class="checklist">
+      <li><div class="checkbox"></div>"Full OpenAI Codex Tutorial: Beginner to Advanced" &mdash; <a href="https://www.youtube.com/watch?v=Cuw0pBjZUOM">youtube.com/watch?v=Cuw0pBjZUOM</a></li>
+      <li><div class="checkbox"></div>"The Ultimate Codex Tutorial: How To Use Codex For Beginners 2026" &mdash; <a href="https://www.youtube.com/watch?v=0TitiOk7hbI">youtube.com/watch?v=0TitiOk7hbI</a></li>
+      <li><div class="checkbox"></div>"CODEX FULL COURSE: From Zero to Deployed App (2026)" &mdash; <a href="https://www.youtube.com/watch?v=hoCWD1aI60Y">youtube.com/watch?v=hoCWD1aI60Y</a></li>
+      <li><div class="checkbox"></div>"The ULTIMATE Beginner's Guide to OpenAI Codex (3-Hour Course)" &mdash; <a href="https://www.youtube.com/watch?v=lmGX79cumyw">youtube.com/watch?v=lmGX79cumyw</a></li>
+      <li><div class="checkbox"></div>Playlist oficial "OpenAI Codex Tutorial" &mdash; <a href="https://www.youtube.com/playlist?list=PL4cUxeGkcC9iDBeA8IyR1IE1kl4w5IDEG">youtube.com/playlist?list=PL4cUxeGkcC9iDBeA8IyR1IE1kl4w5IDEG</a></li>
+    </ul>
+    <p style="font-size:10pt; margin: 10px 0 6px;"><strong>1 vídeo de uso de skills:</strong></p>
+    <ul class="checklist">
+      <li><div class="checkbox"></div>"Codex Skills Explained: Stop Repeating Prompts use SKILLS.md" &mdash; <a href="https://www.youtube.com/watch?v=d3Ydt6LyGeY">youtube.com/watch?v=d3Ydt6LyGeY</a></li>
+    </ul>
+    <p style="font-size:10pt; margin: 10px 0 6px;"><strong>2 repositorios de skills de Codex:</strong></p>
+    <ul class="checklist">
+      <li><div class="checkbox"></div><a href="https://github.com/openai/skills">github.com/openai/skills</a> &mdash; catálogo oficial de skills de OpenAI para Codex.</li>
+      <li><div class="checkbox"></div><a href="https://github.com/RoggeOhta/awesome-codex-cli">github.com/RoggeOhta/awesome-codex-cli</a> &mdash; lista curada de más de 150 herramientas, skills y plugins para Codex CLI.</li>
+    </ul>
+
+    <h3 style="font-size:12pt; margin: 22px 0 10px; font-weight:600;">IBM (fundamentos de IA)</h3>
+    <p style="font-size:10pt; margin-bottom:6px;">IBM Technology está publicando contenido de fundamentos de IA especialmente bueno para perfiles no técnicos: claro, sin humo, y actualizado. 3 recomendaciones:</p>
+    <ul class="checklist">
+      <li><div class="checkbox"></div>"AI, Machine Learning, Deep Learning and Generative AI Explained" &mdash; <a href="https://www.youtube.com/watch?v=qYNweeDHiyU">youtube.com/watch?v=qYNweeDHiyU</a> (aclara de una vez las diferencias entre estos 4 términos que se usan como sinónimos sin serlo).</li>
+      <li><div class="checkbox"></div>Playlist "IBM AI Foundations for Everyone: A Practical Intro for Beginners" &mdash; <a href="https://www.youtube.com/playlist?list=PLVext98k2evjR6pXTHZ591PwYNtKHtgGx">youtube.com/playlist?list=PLVext98k2evjR6pXTHZ591PwYNtKHtgGx</a></li>
+      <li><div class="checkbox"></div>Playlist "IBM AI Series" &mdash; <a href="https://www.youtube.com/playlist?list=PLutB-DANVpnQkv3B8u8fsIfRnZEprpFgp">youtube.com/playlist?list=PLutB-DANVpnQkv3B8u8fsIfRnZEprpFgp</a></li>
+    </ul>
+
+    <h3 style="font-size:12pt; margin: 22px 0 10px; font-weight:600;">Extra: para entender la IA por dentro (Andrej Karpathy)</h3>
+    <p style="font-size:10pt; margin-bottom:6px;">Si en algún momento te pica la curiosidad de entender qué pasa por dentro de uno de estos modelos, Andrej Karpathy (fundador de OpenAI, ex-director de IA en Tesla) tiene las mejores explicaciones para público general que hay. Son densas, sí, pero no llevan una línea de código y se pueden escuchar como un podcast mientras haces otra cosa:</p>
+    <ul class="checklist">
+      <li><div class="checkbox"></div>"[1hr Talk] Intro to Large Language Models" &mdash; la introducción de referencia, 1 hora, ideal para empezar. <a href="https://www.youtube.com/watch?v=zjkBMFhNj_g">youtube.com/watch?v=zjkBMFhNj_g</a></li>
+      <li><div class="checkbox"></div>"Deep Dive into LLMs like ChatGPT" &mdash; 3h30, para profundizar en cómo se entrena un modelo y por qué alucina. <a href="https://www.youtube.com/watch?v=7xTGNNLPyMI">youtube.com/watch?v=7xTGNNLPyMI</a></li>
+    </ul>
+  </div>
+
+  <!-- ====== FASE 2 ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Fase 2</div>
+      <div class="section-title">El siguiente paso: bajar todo esto a casos reales</div>
+      <div class="section-time">4&ndash;6 semanas después</div>
+    </div>
+
+    <div class="solution-box">Cuando termines la Fase 1, lo que toca no es un curso más largo. Es afinar el criterio en dos frentes: tu terreno (sostenibilidad y ESG) y la evaluación formal de proyectos a nivel ejecutivo. En ese módulo también nos meteremos con <strong>agentes de IA, entornos de desarrollo y herramientas corporativas</strong>: cómo se enganchan a los datos de la empresa, qué permisos piden y cómo integrarlos en operaciones sin sustos.</div>
+
+    <div class="problem-box" style="background:#eef4fb;">
+      <span style="display:inline-block;font-size:8pt;font-weight:700;letter-spacing:1.5px;color:#1a3d6b;background:#fff;padding:2px 8px;margin-right:10px;border-radius:2px;">MARCO LEGAL</span>
+      Esto sí que te toca de lleno por tu rol. El <strong>Reglamento Europeo de IA (AI Act)</strong> obliga, desde el 2 de agosto de 2026, a etiquetar el contenido generado con IA (Art. 50), y la autoridad de referencia aquí es AESIA, con sede en A Coruña. En Zoopa lo hemos resumido en un post claro y con lo que de verdad hay que hacer: <a href="https://zoopa.es/en/geo-ai-visibility/spain-ai-law-august-2-2026-content-labeling/">zoopa.es/en/geo-ai-visibility/spain-ai-law-august-2-2026-content-labeling</a>. Va directo a gobernanza, cumplimiento y sostenibilidad.
+    </div>
+
+    <ul class="checklist">
+      <li><div class="checkbox"></div><strong>Microsoft AI Business School</strong> (learn.microsoft.com, gratis): módulos de gobernanza e IA responsable, que tocan de lleno tu área (sesgo, huella de datos, ética). No hace falta licencia de Copilot, el contenido no depende del producto.</li>
+      <li><div class="checkbox"></div><strong>Wharton / Coursera, "AI Strategy"</strong>: si te apetece profundizar en evaluación de proyectos con casos estilo MBA, mismo lenguaje que ya manejas.</li>
+      <li><div class="checkbox"></div><strong>Una sesión interna con tu equipo</strong>: acabada la Fase 1, un par de horas para mapear tres o cuatro tareas repetitivas (informes, revisión de documentos, datos ESG) y ver dónde meter un asistente de IA de los que ya hay en casa.</li>
+    </ul>
+
+    <div class="insight-box">¿Dónde ver casos reales y no solo teoría? El propio curso 2 (Generative AI for Everyone) ya trae ejercicios prácticos del día a día. Para sostenibilidad en concreto, Microsoft AI Business School tiene casos por función (sostenibilidad, RRHH). Y Anthropic publica casos de uso reales en <a href="https://www.anthropic.com/learn">anthropic.com/learn</a>, con OpenAI Academy haciendo lo propio en su web, los dos con ejemplos por sector y bastante al día.</div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Semana 1&ndash;2</div>
+      <div class="timeline-content">AI For Everyone + Generative AI for Everyone (unas 7h entre los dos).</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Semana 3</div>
+      <div class="timeline-content">AI Fluency (2h) y la primera prueba de fuego: delegar una tarea de verdad a un asistente usando las 4D.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Semana 6&ndash;8 (Fase 2)</div>
+      <div class="timeline-content">Gobernanza e IA responsable (Microsoft AI Business School) y la sesión de mapeo de casos con el equipo.</div>
+    </div>
+  </div>
+
+  <!-- ====== BOLA EXTRA: LIBRO ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Bola extra</div>
+      <div class="section-title">Un libro, para llevarte a la playa o dejar encima de la mesa de PAW y parecer más AIcool.</div>
+      <div class="section-time">&mdash;</div>
+    </div>
+    <div class="course-card">
+      <h3>Co-Intelligence: Living and Working with AI</h3>
+      <div class="course-meta">
+        <span class="pill pill-provider">Ethan Mollick</span>
+        <span class="pill pill-hours">~5h de lectura</span>
+        <span class="pill pill-free">No gratuito</span>
+      </div>
+      <p><strong>Por qué este y no otro:</strong> best-seller del New York Times, lo firma un profesor de Wharton (o sea, el mismo idioma MBA que ya hablas), y no tiene ni una línea de código ni jerga rara. Trata la IA como un compañero de trabajo más y te da criterio para saber cuándo pasarle una tarea y cuándo no. Justo lo que este roadmap quiere que acabes teniendo en la cabeza.</p>
+      <p><strong>Quién lo respalda:</strong> Eric Horvitz (Chief Scientific Officer de Microsoft) y Reid Hoffman (cofundador de LinkedIn), entre otros.</p>
+      <p><strong>En versión audio</strong> (Audible), por si te tomas lo de ponerte morena muy en serio, o si prefieres oírlo mientras haces rodillo: <a href="https://www.audible.com/pd/Co-Intelligence-Audiobook/B0CNFJ1BVP">audible.com/pd/Co-Intelligence-Audiobook/B0CNFJ1BVP</a> (hay también <a href="https://www.audible.com/pd/Co-inteligencia-Co-Intelligence-Audiobook/B0DN85D71X">versión en español</a>).</p>
+    </div>
+  </div>
+
+  <!-- ====== BLOG ZOOPA ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Para profundizar</div>
+      <div class="section-title">Artículos del blog de Zoopa</div>
+      <div class="section-time">&mdash;</div>
+    </div>
+    <ul class="checklist">
+      <li><div class="checkbox"></div>"El Futuro es Ahora: IA, Innovación y el Nuevo Paradigma Digital". Una panorámica de hacia dónde va la IA generativa y qué implica para cualquier organización. <a href="https://zoopa.es/es/blog/el-futur-es-ara-ia-innovacio-i-el-nou-paradigma-digital/">zoopa.es/es/blog/el-futur-es-ara-ia-innovacio-i-el-nou-paradigma-digital</a></li>
+      <li><div class="checkbox"></div>"Visibilidad de Marca en la Era de la IA: AIO, AEO, GEO y SXO". Cómo perciben las marcas los motores de IA. El mismo razonamiento sirve para pensar reputación y comunicación en cualquier institución. <a href="https://zoopa.es/es/blog/visibilidad-marca-ia-aio-aeo-geo-sxo/">zoopa.es/es/blog/visibilidad-marca-ia-aio-aeo-geo-sxo</a></li>
+      <li><div class="checkbox"></div>"La Revolución de la Generación de Contenidos usando IA con RAG". Explica el concepto de RAG sin tecnicismos, útil para entender cómo un asistente puede trabajar con los datos de tu organización sin inventarse cosas. <a href="https://zoopa.es/es/blog/la-revolucion-de-la-generacion-de-contenidos-usando-ia-con-rag">zoopa.es/es/blog/la-revolucion-de-la-generacion-de-contenidos-usando-ia-con-rag</a></li>
+    </ul>
+  </div>
+
+  <!-- ====== GLOSARIO ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Glosario</div>
+      <div class="section-title">Términos usados en este documento</div>
+      <div class="section-time">&mdash;</div>
+    </div>
+    <table>
+      <tr><th>Término</th><th>Qué significa</th></tr>
+      <tr><td class="td-label">LLM (Large Language Model)</td><td>Modelo de IA entrenado con enormes cantidades de texto, capaz de generar y entender lenguaje natural. Es el motor detrás de ChatGPT, Claude, Gemini, etc.</td></tr>
+      <tr><td class="td-label">IA generativa</td><td>Rama de la IA que crea contenido nuevo (texto, imagen, código, audio) en vez de solo clasificar o predecir datos existentes.</td></tr>
+      <tr><td class="td-label">Prompt</td><td>La instrucción o pregunta que se le da a un modelo de IA. La calidad del prompt condiciona directamente la calidad de la respuesta.</td></tr>
+      <tr><td class="td-label">Alucinación</td><td>Cuando un modelo de IA genera información falsa o inventada con apariencia de certeza. Es el motivo por el que siempre hay que revisar el output antes de usarlo.</td></tr>
+      <tr><td class="td-label">Agente de IA (agentic AI)</td><td>Un sistema de IA que no solo responde, sino que ejecuta tareas de varios pasos por sí mismo (buscar información, escribir un documento, operar una app) con supervisión humana.</td></tr>
+      <tr><td class="td-label">Skill</td><td>Un paquete reutilizable de instrucciones que enseña a un asistente de IA (Claude, Codex) a resolver un tipo concreto de tarea de forma consistente, sin tener que reexplicarla cada vez.</td></tr>
+      <tr><td class="td-label">Marco 4D</td><td>Framework de Anthropic para delegar trabajo a la IA con criterio: Delegación (qué le encargo), Descripción (cómo se lo explico), Discernimiento (cómo evalúo el resultado) y Diligencia (qué responsabilidad mantengo).</td></tr>
+      <tr><td class="td-label">Gobernanza de IA / IA responsable</td><td>El conjunto de políticas y controles que aseguran que el uso de IA en una organización es ético, seguro y cumple la normativa (sesgo, privacidad, transparencia).</td></tr>
+      <tr><td class="td-label">ROI de IA</td><td>El retorno esperado de invertir en un proyecto de IA, medido en tiempo ahorrado, coste reducido o ingresos generados, frente a la inversión y el riesgo asumidos.</td></tr>
+      <tr><td class="td-label">Caso de uso</td><td>La aplicación concreta y acotada de la IA a un problema real de la organización (p. ej. "resumir informes de proveedores"), en vez de una idea genérica de "usar IA".</td></tr>
+      <tr><td class="td-label">Copilot</td><td>Nombre del asistente de IA de Microsoft integrado en Office/Teams; requiere licencia específica, a diferencia de Claude o ChatGPT.</td></tr>
+    </table>
+  </div>
+
+  <!-- ====== BUZZWORDS (BROMA) ====== -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-number">Bonus track</div>
+      <div class="section-title">5 palabras para colar en una reunión y que parezca que controlas</div>
+      <div class="section-time">Medio en broma</div>
+    </div>
+    <div class="insight-box" style="background:#fdf3fa;">
+      Esto va con retranca, pero funciona. Son las palabras que más se han soltado en reuniones este último año. Úsalas con cabeza (una por reunión, no las cinco de golpe, que canta):
+    </div>
+    <table>
+      <tr><th>La palabra</th><th>Qué significa de verdad</th><th>Cómo colarla sin que cante</th></tr>
+      <tr><td class="td-label">Agéntico</td><td>Que la IA no solo responde, sino que hace cosas por sí sola, en varios pasos.</td><td>"¿Y esto tiene un enfoque agéntico o se queda en un chatbot?"</td></tr>
+      <tr><td class="td-label">Alucinación</td><td>Cuando la IA se inventa un dato con toda la seguridad del mundo.</td><td>"Cuidado, que aquí el modelo puede estar alucinando."</td></tr>
+      <tr><td class="td-label">Prompt</td><td>La instrucción que le das a la IA.</td><td>"El problema no es la IA, es que el prompt está mal planteado."</td></tr>
+      <tr><td class="td-label">Fine-tuning</td><td>Afinar un modelo con datos propios para tu caso concreto.</td><td>"¿Esto lo resolvemos con prompt o ya hablamos de fine-tuning?"</td></tr>
+      <tr><td class="td-label">RAG</td><td>Conectar la IA a tus documentos para que responda con ellos y no se invente.</td><td>"Para que use nuestros datos habría que montar un RAG."</td></tr>
+    </table>
+    <p style="font-size:9.5pt; color:#666; margin-top:10px; font-style:italic;">Aviso: si de repente las sueltas todas juntas, el efecto es el contrario. Con dosis, quedas de maravilla.</p>
+  </div>
+
+  <footer>
+    <div class="footer-info">
+      <div><strong>Zoopa</strong> · Innovation &amp; Creative Technology Agency</div>
+      <div>4 de julio de 2026</div>
+    </div>
+    <div class="footer-note">
+      Documento preparado para Choni Fernández Veciana. Cursos verificados a fecha de este informe; enlaces y contenidos pueden actualizarse por parte de cada proveedor.
+    </div>
+  </footer>
+
+</body>
+</html>
