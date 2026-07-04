@@ -92,22 +92,28 @@
     .cover-headline-metric {
       background: #0a0a0a;
       color: #fff;
-      padding: 30px 35px;
-      margin: 30px 0 50px;
-      max-width: 90%;
+      padding: 16px 22px;
+      margin: 24px 0 40px;
+      align-self: flex-start;
+      width: fit-content;
+      max-width: 100%;
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
     }
     .cover-headline-metric .metric-value {
-      font-size: 48pt;
+      font-size: 26pt;
       font-weight: 700;
-      letter-spacing: -2px;
+      letter-spacing: -1px;
       line-height: 1;
+      flex-shrink: 0;
     }
     .cover-headline-metric .metric-label {
-      font-size: 11pt;
+      font-size: 9pt;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-top: 10px;
+      letter-spacing: 0.8px;
       opacity: 0.7;
+      line-height: 1.35;
     }
     .cover-footer {
       display: flex;
@@ -312,9 +318,9 @@
       .cover h1 { font-size: 28pt; letter-spacing: -0.5px; max-width: 100%; }
       .cover-subtitle { font-size: 13pt; max-width: 100%; margin-bottom: 30px; }
       .cover-eyebrow { margin-bottom: 18px; }
-      .cover-headline-metric { padding: 22px 20px; margin: 20px 0 30px; max-width: 100%; }
-      .cover-headline-metric .metric-value { font-size: 32pt; letter-spacing: -1px; }
-      .cover-headline-metric .metric-label { font-size: 10pt; }
+      .cover-headline-metric { padding: 14px 18px; margin: 18px 0 28px; max-width: 100%; gap: 12px; }
+      .cover-headline-metric .metric-value { font-size: 24pt; letter-spacing: -1px; }
+      .cover-headline-metric .metric-label { font-size: 8.5pt; }
       .cover-footer { flex-direction: column; align-items: flex-start; gap: 16px; }
       .cover-date { text-align: left; }
 
@@ -360,7 +366,7 @@
     <div>
       <div class="cover-eyebrow">Zoopa · Formación ejecutiva en IA</div>
       <h1>Roadmap de introducción a la IA</h1>
-      <div class="cover-subtitle">Choni, esto es un camino de tres cursos gratuitos, en orden, para que en unas semanas tengas base sólida y criterio propio sobre IA. Sin código y sin rodeos.</div>
+      <div class="cover-subtitle">Choni, esto es un camino de tres cursos gratuitos, en orden, para que en unas semanas tengas base sólida y criterio propio sobre IA. Sin coste, sin relleno, sin que te peguen rollos de consultoría sin contenido, sin programar y sin gluten.</div>
     </div>
 
     <div class="cover-headline-metric">
@@ -685,7 +691,7 @@
       <tr><td class="td-label">Gobernanza de IA / IA responsable</td><td>El conjunto de políticas y controles que aseguran que el uso de IA en una organización es ético, seguro y cumple la normativa (sesgo, privacidad, transparencia).</td></tr>
       <tr><td class="td-label">ROI de IA</td><td>El retorno esperado de invertir en un proyecto de IA, medido en tiempo ahorrado, coste reducido o ingresos generados, frente a la inversión y el riesgo asumidos.</td></tr>
       <tr><td class="td-label">Caso de uso</td><td>La aplicación concreta y acotada de la IA a un problema real de la organización (p. ej. "resumir informes de proveedores"), en vez de una idea genérica de "usar IA".</td></tr>
-      <tr><td class="td-label">Copilot</td><td>Nombre del asistente de IA de Microsoft integrado en Office/Teams; requiere licencia específica, a diferencia de Claude o ChatGPT.</td></tr>
+      <tr><td class="td-label">Copilot</td><td>Nombre del asistente de IA de Microsoft integrado en Office/Teams; requiere licencia específica, a diferencia de Claude o ChatGPT. Usaba solo ChatGPT como modelo pero iba FATAL; luego integraron Claude y mejoró un poco, y tarde o temprano irá muy bien y ganarán en el entorno corporativo. Hace un mes sacaron seis modelos propios muy buenos.</td></tr>
     </table>
   </div>
 
